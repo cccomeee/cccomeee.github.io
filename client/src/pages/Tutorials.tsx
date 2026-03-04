@@ -1,59 +1,9 @@
 import TutorialCard from "@/components/TutorialCard";
 import CodeBlock from "@/components/CodeBlock";
-import { Code2, FileCode, Server, Database } from "lucide-react";
+import { Code2 } from "lucide-react";
+import { tutorials } from "@/data/content";
 
 export default function Tutorials() {
-  const tutorials = [
-    {
-      title: "JavaScript 基礎入門",
-      description: "從零開始學習 JavaScript，掌握變數、函數、迴圈等基本概念，為前端開發打下堅實基礎。",
-      language: "JavaScript",
-      difficulty: "初級" as const,
-      duration: "2小時",
-      icon: <Code2 className="w-6 h-6 text-primary" />,
-    },
-    {
-      title: "React 完整指南",
-      description: "完整學習 React 框架，從組件基礎到 Hooks、狀態管理的全方位課程。",
-      language: "React",
-      difficulty: "中級" as const,
-      duration: "8小時",
-      icon: <FileCode className="w-6 h-6 text-primary" />,
-    },
-    {
-      title: "TypeScript 深度解析",
-      description: "深入理解 TypeScript 型別系統，學習泛型、條件型別等進階特性。",
-      language: "TypeScript",
-      difficulty: "中級" as const,
-      duration: "5小時",
-      icon: <Code2 className="w-6 h-6 text-primary" />,
-    },
-    {
-      title: "Node.js 後端開發",
-      description: "建立強大的後端應用，學習 Express、中介軟體、資料庫整合等技術。",
-      language: "Node.js",
-      difficulty: "中級" as const,
-      duration: "6小時",
-      icon: <Server className="w-6 h-6 text-primary" />,
-    },
-    {
-      title: "SQL 資料庫設計",
-      description: "學習關聯式資料庫設計原則，掌握 SQL 查詢語法和資料庫優化技巧。",
-      language: "SQL",
-      difficulty: "初級" as const,
-      duration: "4小時",
-      icon: <Database className="w-6 h-6 text-primary" />,
-    },
-    {
-      title: "Git 版本控制",
-      description: "掌握 Git 的核心概念和常用指令，學習分支管理和團隊協作流程。",
-      language: "Git",
-      difficulty: "初級" as const,
-      duration: "3小時",
-      icon: <Code2 className="w-6 h-6 text-primary" />,
-    },
-  ];
-
   const sampleCode = `// React Hooks 範例
 import { useState, useEffect } from 'react';
 
@@ -98,12 +48,8 @@ function Counter() {
 
         <h2 className="text-3xl font-bold font-mono mb-8">所有課程</h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {tutorials.map((tutorial, index) => (
-            <TutorialCard
-              key={index}
-              {...tutorial}
-              onStart={() => console.log(`Starting: ${tutorial.title}`)}
-            />
+          {tutorials.map((tutorial) => (
+            <TutorialCard key={tutorial.slug} tutorial={tutorial} />
           ))}
         </div>
       </div>

@@ -1,0 +1,40 @@
+{
+  "insights": [
+    {
+      "title": "React Hooks 的使用心得",
+      "excerpt": "在使用 React Hooks 一段時間後，我發現它們大大簡化了狀態管理和副作用處理。特別是 useEffect 和 useCallback 的組合使用，能有效避免不必要的重新渲染...",
+      "tags": [
+        "React",
+        "JavaScript",
+        "前端"
+      ],
+      "publishedAt": "2024-11-07",
+      "content": "# React Hooks 的使用心得\n\n在使用 React Hooks 一段時間後，我發現它們大大簡化了狀態管理和副作用處理。\n\n## 主要優點\n\n### 1. 簡化狀態管理\n使用 `useState` 可以更直觀地管理組件狀態，不需要寫 class component 的 constructor。\n\n### 2. 副作用處理\n`useEffect` 讓我們能夠在函數組件中處理副作用，而且可以通過依賴陣列精確控制執行時機。\n\n### 3. 性能優化\n特別是 `useEffect` 和 `useCallback` 的組合使用，能有效避免不必要的重新渲染。\n\n## 實際應用\n\n以下是一個簡單的範例：\n\n```javascript\nimport { useState, useEffect, useCallback } from 'react';\n\nfunction Counter() {\n  const [count, setCount] = useState(0);\n  \n  useEffect(() => {\n    document.title = `Count: ${count}`;\n  }, [count]);\n  \n  const handleClick = useCallback(() => {\n    setCount(count + 1);\n  }, [count]);\n  \n  return (\n    <button onClick={handleClick}>\n      點擊次數: {count}\n    </button>\n  );\n}\n```\n\n這個範例展示了如何結合使用多個 Hooks 來創建一個功能完整的組件。\n",
+      "slug": "React-Hooks-的使用心得"
+    }
+  ],
+  "diaries": [
+    {
+      "title": "完成 React 專案重構",
+      "date": "2024-11-07",
+      "tags": [
+        "React",
+        "重構",
+        "TypeScript"
+      ],
+      "content": "# 完成 React 專案重構\n\n今天終於完成了長達兩週的專案重構工作。\n\n## 重構內容\n\n### 1. 組件改寫\n將 class component 全部改寫為 functional component，並引入了 TypeScript。\n\n### 2. 代碼結構\n雖然過程辛苦，但看到更乾淨的代碼結構，一切都值得了。\n\n### 3. 型別安全\n使用 TypeScript 後，代碼的型別安全性大幅提升，減少了許多潛在的錯誤。\n\n## 學習心得\n\n這次重構讓我學到了很多：\n\n- **函數組件的優勢**：更簡潔、更易於測試\n- **TypeScript 的價值**：編譯時期的型別檢查\n- **重構的重要性**：定期重構可以保持代碼品質\n",
+      "slug": "完成-React-專案重構"
+    }
+  ],
+  "tutorials": [
+    {
+      "title": "JavaScript 基礎入門",
+      "description": "從零開始學習 JavaScript，掌握變數、函數、迴圈等基本概念，為前端開發打下堅實基礎。",
+      "language": "JavaScript",
+      "difficulty": "初級",
+      "duration": "2小時",
+      "content": "# JavaScript 基礎入門\n\n從零開始學習 JavaScript，掌握變數、函數、迴圈等基本概念，為前端開發打下堅實基礎。\n\n## 變數宣告\n\nJavaScript 有三種變數宣告方式：\n\n```javascript\n// var (不建議使用)\nvar oldWay = \"old\";\n\n// let (可重新賦值)\nlet modern = \"modern\";\n\n// const (常數，不可重新賦值)\nconst constant = \"constant\";\n```\n\n## 函數\n\nJavaScript 有多種函數定義方式：\n\n```javascript\n// 函數宣告\nfunction traditional() {\n  return \"traditional\";\n}\n\n// 箭頭函數\nconst arrow = () => {\n  return \"arrow\";\n};\n\n// 簡化箭頭函數\nconst simple = () => \"simple\";\n```\n\n## 迴圈\n\n```javascript\n// for 迴圈\nfor (let i = 0; i < 10; i++) {\n  console.log(i);\n}\n\n// for...of 迴圈\nconst array = [1, 2, 3];\nfor (const item of array) {\n  console.log(item);\n}\n```\n",
+      "slug": "JavaScript-基礎入門"
+    }
+  ]
+}

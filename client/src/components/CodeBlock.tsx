@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Highlight, themes } from "prism-react-renderer";
 import { Button } from "@/components/ui/button";
 import { Check, Copy } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
@@ -23,8 +24,8 @@ export default function CodeBlock({ code, language = "javascript" }: CodeBlockPr
   };
 
   return (
-    <div className="relative group rounded-lg overflow-hidden border border-card-border">
-      <div className="flex items-center justify-between px-4 py-2 bg-card border-b border-card-border">
+    <div className="relative group rounded-lg overflow-hidden border border-border my-4">
+      <div className="flex items-center justify-between px-4 py-2 bg-muted/50 border-b border-border">
         <span className="text-sm font-mono text-muted-foreground">
           {language}
         </span>
@@ -48,10 +49,20 @@ export default function CodeBlock({ code, language = "javascript" }: CodeBlockPr
           )}
         </Button>
       </div>
-      <div className="p-4 bg-card overflow-x-auto">
-        <pre className="font-mono text-sm">
-          <code className="text-foreground">{code}</code>
-        </pre>
+      <div className="overflow-x-auto">
+        <Highlight theme={themes.github} code={code} language={language}>
+          {({ className, style, tokens, getLineProps, getTokenProps }) => (
+            <pre className={className} style={{ ...style, margin: 0, padding: "1rem", fontSize: "0.875rem", lineHeight: 1.6 }}>
+              {tokens.map((line, i) => (
+                <div key={i} {...getLineProps({ line })}>
+                  {line.map((token, key) => (
+                    <span key={key} {...getTokenProps({ token })} />
+                  ))}
+                </div>
+              ))}
+            </pre>
+          )}
+        </Highlight>
       </div>
     </div>
   );

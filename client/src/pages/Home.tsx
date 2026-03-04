@@ -2,51 +2,13 @@ import Hero from "@/components/Hero";
 import InsightCard from "@/components/InsightCard";
 import TutorialCard from "@/components/TutorialCard";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Code2, FileText, BookOpen } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Link } from "wouter";
+import { insights, tutorials } from "@/data/content";
 
 export default function Home() {
-  const featuredInsights = [
-    {
-      title: "React 性能優化技巧",
-      excerpt: "深入探討 React 應用的性能優化方法，包括 memo、useMemo 和 useCallback 的最佳實踐...",
-      tags: ["React", "性能", "優化"],
-      date: "2024-11-05",
-    },
-    {
-      title: "TypeScript 進階型別",
-      excerpt: "學習 TypeScript 的進階型別系統，掌握泛型、條件型別和映射型別的使用方法...",
-      tags: ["TypeScript", "型別系統"],
-      date: "2024-11-03",
-    },
-  ];
-
-  const featuredTutorials = [
-    {
-      title: "JavaScript 基礎入門",
-      description: "從零開始學習 JavaScript，掌握變數、函數、迴圈等基本概念。",
-      language: "JavaScript",
-      difficulty: "初級" as const,
-      duration: "2小時",
-      icon: <Code2 className="w-6 h-6 text-primary" />,
-    },
-    {
-      title: "React 完整指南",
-      description: "完整學習 React 框架，從基礎到進階的全方位課程。",
-      language: "React",
-      difficulty: "中級" as const,
-      duration: "8小時",
-      icon: <FileText className="w-6 h-6 text-primary" />,
-    },
-    {
-      title: "Node.js 後端開發",
-      description: "建立強大的後端應用，學習 Express、資料庫整合等技術。",
-      language: "Node.js",
-      difficulty: "中級" as const,
-      duration: "6小時",
-      icon: <BookOpen className="w-6 h-6 text-primary" />,
-    },
-  ];
+  const featuredInsights = insights.slice(0, 2);
+  const featuredTutorials = tutorials.slice(0, 3);
 
   return (
     <div className="min-h-screen">
@@ -72,12 +34,8 @@ export default function Home() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-6">
-            {featuredInsights.map((insight, index) => (
-              <InsightCard
-                key={index}
-                {...insight}
-                onReadMore={() => console.log(`Reading: ${insight.title}`)}
-              />
+            {featuredInsights.map((insight) => (
+              <InsightCard key={insight.slug} insight={insight} />
             ))}
           </div>
         </div>
@@ -103,12 +61,8 @@ export default function Home() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {featuredTutorials.map((tutorial, index) => (
-              <TutorialCard
-                key={index}
-                {...tutorial}
-                onStart={() => console.log(`Starting: ${tutorial.title}`)}
-              />
+            {featuredTutorials.map((tutorial) => (
+              <TutorialCard key={tutorial.slug} tutorial={tutorial} />
             ))}
           </div>
         </div>

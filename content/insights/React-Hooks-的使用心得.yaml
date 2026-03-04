@@ -1,0 +1,51 @@
+title: React Hooks 的使用心得
+excerpt: 在使用 React Hooks 一段時間後，我發現它們大大簡化了狀態管理和副作用處理。特別是 useEffect 和 useCallback 的組合使用，能有效避免不必要的重新渲染...
+tags:
+  - React
+  - JavaScript
+  - 前端
+publishedAt: "2024-11-07"
+content: |
+  # React Hooks 的使用心得
+
+  在使用 React Hooks 一段時間後，我發現它們大大簡化了狀態管理和副作用處理。
+
+  ## 主要優點
+
+  ### 1. 簡化狀態管理
+  使用 `useState` 可以更直觀地管理組件狀態，不需要寫 class component 的 constructor。
+
+  ### 2. 副作用處理
+  `useEffect` 讓我們能夠在函數組件中處理副作用，而且可以通過依賴陣列精確控制執行時機。
+
+  ### 3. 性能優化
+  特別是 `useEffect` 和 `useCallback` 的組合使用，能有效避免不必要的重新渲染。
+
+  ## 實際應用
+
+  以下是一個簡單的範例：
+
+  ```javascript
+  import { useState, useEffect, useCallback } from 'react';
+
+  function Counter() {
+    const [count, setCount] = useState(0);
+    
+    useEffect(() => {
+      document.title = `Count: ${count}`;
+    }, [count]);
+    
+    const handleClick = useCallback(() => {
+      setCount(count + 1);
+    }, [count]);
+    
+    return (
+      <button onClick={handleClick}>
+        點擊次數: {count}
+      </button>
+    );
+  }
+  ```
+
+  這個範例展示了如何結合使用多個 Hooks 來創建一個功能完整的組件。
+

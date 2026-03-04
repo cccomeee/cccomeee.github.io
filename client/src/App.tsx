@@ -1,18 +1,16 @@
 import { Switch, Route } from "wouter";
-import { queryClient } from "./lib/queryClient";
-import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import Home from "@/pages/Home";
 import Insights from "@/pages/Insights";
+import InsightDetail from "@/pages/InsightDetail";
 import Diary from "@/pages/Diary";
+import DiaryDetail from "@/pages/DiaryDetail";
 import Tutorials from "@/pages/Tutorials";
+import TutorialDetail from "@/pages/TutorialDetail";
 import Contact from "@/pages/Contact";
-import Admin from "@/pages/Admin";
-import Login from "@/pages/Login";
-import Register from "@/pages/Register";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -20,12 +18,12 @@ function Router() {
     <Switch>
       <Route path="/" component={Home} />
       <Route path="/insights" component={Insights} />
+      <Route path="/insights/:slug" component={InsightDetail} />
       <Route path="/diary" component={Diary} />
+      <Route path="/diary/:slug" component={DiaryDetail} />
       <Route path="/tutorials" component={Tutorials} />
+      <Route path="/tutorials/:slug" component={TutorialDetail} />
       <Route path="/contact" component={Contact} />
-      <Route path="/admin" component={Admin} />
-      <Route path="/login" component={Login} />
-      <Route path="/register" component={Register} />
       <Route component={NotFound} />
     </Switch>
   );
@@ -33,18 +31,16 @@ function Router() {
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <div className="min-h-screen flex flex-col">
-          <Navigation />
-          <main className="flex-1">
-            <Router />
-          </main>
-          <Footer />
-        </div>
-        <Toaster />
-      </TooltipProvider>
-    </QueryClientProvider>
+    <TooltipProvider>
+      <div className="min-h-screen flex flex-col">
+        <Navigation />
+        <main className="flex-1">
+          <Router />
+        </main>
+        <Footer />
+      </div>
+      <Toaster />
+    </TooltipProvider>
   );
 }
 

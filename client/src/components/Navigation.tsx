@@ -1,39 +1,11 @@
 import { useState } from "react";
 import { Link, useLocation } from "wouter";
-import { Menu, X, Code2, LogIn, LogOut, UserPlus } from "lucide-react";
+import { Menu, X, Code2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useQuery } from "@tanstack/react-query";
-import { apiRequest, queryClient } from "@/lib/queryClient";
-import { useToast } from "@/hooks/use-toast";
-import type { User } from "@shared/schema";
 
 export default function Navigation() {
-  const [location, setLocation] = useLocation();
+  const [location] = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { toast } = useToast();
-
-  const { data: user } = useQuery<User>({
-    queryKey: ["/api/auth/user"],
-    retry: false,
-  });
-
-  const handleLogout = async () => {
-    try {
-      await apiRequest("POST", "/api/auth/logout");
-      await queryClient.invalidateQueries({ queryKey: ["/api/auth/user"] });
-      toast({
-        title: "登出成功",
-        description: "期待您再次光臨！",
-      });
-      setLocation("/");
-    } catch (error) {
-      toast({
-        title: "登出失敗",
-        description: "請稍後再試",
-        variant: "destructive",
-      });
-    }
-  };
 
   const navItems = [
     { label: "首頁", path: "/" },
@@ -41,7 +13,6 @@ export default function Navigation() {
     { label: "日記", path: "/diary" },
     { label: "教學", path: "/tutorials" },
     { label: "聯繫", path: "/contact" },
-    ...(user ? [{ label: "管理", path: "/admin" }] : []),
   ];
 
   return (
@@ -71,32 +42,6 @@ export default function Navigation() {
                 )}
               </Link>
             ))}
-            {user ? (
-              <Button
-                variant="ghost"
-                onClick={handleLogout}
-                className="gap-2"
-                data-testid="button-logout"
-              >
-                <LogOut className="w-4 h-4" />
-                登出
-              </Button>
-            ) : (
-              <>
-                <Link href="/login">
-                  <Button variant="ghost" className="gap-2" data-testid="button-nav-login">
-                    <LogIn className="w-4 h-4" />
-                    登入
-                  </Button>
-                </Link>
-                <Link href="/register">
-                  <Button className="gap-2" data-testid="button-nav-register">
-                    <UserPlus className="w-4 h-4" />
-                    註冊
-                  </Button>
-                </Link>
-              </>
-            )}
           </div>
 
           <Button
@@ -127,44 +72,6 @@ export default function Navigation() {
                 {item.label}
               </Link>
             ))}
-            {user ? (
-              <Button
-                variant="ghost"
-                onClick={() => {
-                  handleLogout();
-                  setMobileMenuOpen(false);
-                }}
-                className="w-full justify-start gap-2"
-                data-testid="button-mobile-logout"
-              >
-                <LogOut className="w-4 h-4" />
-                登出
-              </Button>
-            ) : (
-              <div className="space-y-2">
-                <Link href="/login" className="block">
-                  <Button
-                    variant="ghost"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="w-full justify-start gap-2"
-                    data-testid="button-mobile-login"
-                  >
-                    <LogIn className="w-4 h-4" />
-                    登入
-                  </Button>
-                </Link>
-                <Link href="/register" className="block">
-                  <Button
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="w-full justify-start gap-2"
-                    data-testid="button-mobile-register"
-                  >
-                    <UserPlus className="w-4 h-4" />
-                    註冊
-                  </Button>
-                </Link>
-              </div>
-            )}
           </div>
         </div>
       )}

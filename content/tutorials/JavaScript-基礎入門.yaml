@@ -1,0 +1,59 @@
+title: JavaScript 基礎入門
+description: 從零開始學習 JavaScript，掌握變數、函數、迴圈等基本概念，為前端開發打下堅實基礎。
+language: JavaScript
+difficulty: 初級
+duration: "2小時"
+content: |
+  # JavaScript 基礎入門
+
+  從零開始學習 JavaScript，掌握變數、函數、迴圈等基本概念，為前端開發打下堅實基礎。
+
+  ## 變數宣告
+
+  JavaScript 有三種變數宣告方式：
+
+  ```javascript
+  // var (不建議使用)
+  var oldWay = "old";
+
+  // let (可重新賦值)
+  let modern = "modern";
+
+  // const (常數，不可重新賦值)
+  const constant = "constant";
+  ```
+
+  ## 函數
+
+  JavaScript 有多種函數定義方式：
+
+  ```javascript
+  // 函數宣告
+  function traditional() {
+    return "traditional";
+  }
+
+  // 箭頭函數
+  const arrow = () => {
+    return "arrow";
+  };
+
+  // 簡化箭頭函數
+  const simple = () => "simple";
+  ```
+
+  ## 迴圈
+
+  ```javascript
+  // for 迴圈
+  for (let i = 0; i < 10; i++) {
+    console.log(i);
+  }
+
+  // for...of 迴圈
+  const array = [1, 2, 3];
+  for (const item of array) {
+    console.log(item);
+  }
+  ```
+
